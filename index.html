@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Video Generator — by MediaZClouds</title>
+  <meta name="description" content="AI Video Generator by MediaZClouds turns your ideas, text and photos into stunning videos in seconds." />
+  <style>
+    :root {
+      --bg: #0b0b14;
+      --bg-soft: #141424;
+      --card: #1a1a2e;
+      --text: #ececf4;
+      --muted: #a3a3b8;
+      --accent: #7c5cff;
+      --accent-2: #ff5c9e;
+      --border: rgba(255, 255, 255, 0.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+    .gradient-text {
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* Header */
+    header {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(11, 11, 20, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+    .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.15rem; }
+    .logo-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      display: grid; place-items: center;
+    }
+    .nav-links { display: flex; gap: 28px; font-size: 0.95rem; color: var(--muted); }
+    .nav-links a:hover { color: var(--text); }
+
+    /* Hero */
+    .hero { padding: 96px 0 72px; text-align: center; position: relative; overflow: hidden; }
+    .hero::before {
+      content: ""; position: absolute; inset: -40% 10% auto 10%; height: 600px;
+      background: radial-gradient(closest-side, rgba(124, 92, 255, 0.35), transparent);
+      z-index: -1;
+    }
+    .badge {
+      display: inline-block; padding: 6px 14px; border-radius: 999px;
+      border: 1px solid var(--border); background: var(--bg-soft);
+      color: var(--muted); font-size: 0.85rem; margin-bottom: 24px;
+    }
+    .hero h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); line-height: 1.15; margin-bottom: 20px; }
+    .hero p { color: var(--muted); font-size: 1.15rem; max-width: 640px; margin: 0 auto 36px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 14px 28px; border-radius: 14px; font-weight: 600;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: linear-gradient(90deg, var(--accent), var(--accent-2)); color: #fff; }
+    .btn-ghost { border: 1px solid var(--border); background: var(--bg-soft); margin-left: 12px; }
+
+    /* Sections */
+    section { padding: 80px 0; }
+    .section-title { text-align: center; margin-bottom: 48px; }
+    .section-title h2 { font-size: clamp(1.8rem, 3.5vw, 2.5rem); margin-bottom: 12px; }
+    .section-title p { color: var(--muted); max-width: 600px; margin: 0 auto; }
+
+    .grid { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 18px; padding: 28px;
+    }
+    .card .icon {
+      width: 48px; height: 48px; border-radius: 12px; margin-bottom: 18px;
+      background: rgba(124, 92, 255, 0.15); display: grid; place-items: center; font-size: 1.5rem;
+    }
+    .card h3 { font-size: 1.15rem; margin-bottom: 8px; }
+    .card p { color: var(--muted); font-size: 0.95rem; }
+
+    .steps { counter-reset: step; }
+    .step { position: relative; padding-top: 56px; }
+    .step::before {
+      counter-increment: step; content: counter(step);
+      position: absolute; top: 24px; left: 28px;
+      font-weight: 800; font-size: 1.5rem;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+
+    .alt { background: var(--bg-soft); }
+
+    /* FAQ */
+    .faq { max-width: 760px; margin: 0 auto; }
+    details {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 18px 22px; margin-bottom: 14px;
+    }
+    summary { cursor: pointer; font-weight: 600; list-style: none; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; float: right; color: var(--muted); }
+    details[open] summary::after { content: "−"; }
+    details p { color: var(--muted); margin-top: 12px; }
+
+    /* Contact */
+    .contact-box {
+      text-align: center; padding: 56px 32px; border-radius: 24px;
+      background: linear-gradient(135deg, rgba(124, 92, 255, 0.2), rgba(255, 92, 158, 0.15));
+      border: 1px solid var(--border);
+    }
+    .contact-box h2 { font-size: 2rem; margin-bottom: 12px; }
+    .contact-box p { color: var(--muted); margin-bottom: 28px; }
+
+    /* Footer */
+    footer { border-top: 1px solid var(--border); padding: 32px 0; color: var(--muted); font-size: 0.9rem; }
+    .footer-inner { display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: center; }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a:hover { color: var(--text); }
+
+    @media (max-width: 720px) {
+      .nav-links { display: none; }
+      .btn-ghost { margin: 12px 0 0; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="#" class="logo">
+        <span class="logo-icon">▶</span>
+        AI Video Generator
+      </a>
+      <nav class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Support</a>
+        <a href="polices.html">Privacy Policy</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <span class="badge">by MediaZClouds</span>
+        <h1>Turn your ideas into<br /><span class="gradient-text">stunning videos</span> in seconds</h1>
+        <p>Describe a scene, upload a photo, or pick a template — our AI creates high-quality, share-ready videos for you. No editing skills required.</p>
+        <a href="#contact" class="btn btn-primary">Get the App</a>
+        <a href="#features" class="btn btn-ghost">Explore Features</a>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="container">
+        <div class="section-title">
+          <h2>Everything you need to create</h2>
+          <p>Powerful AI tools packed into a simple, fast and fun app.</p>
+        </div>
+        <div class="grid">
+          <div class="card">
+            <div class="icon">✍️</div>
+            <h3>Text to Video</h3>
+            <p>Type a prompt and watch the AI bring your words to life as a vivid video clip.</p>
+          </div>
+          <div class="card">
+            <div class="icon">🖼️</div>
+            <h3>Photo to Video</h3>
+            <p>Animate your photos with natural motion, camera moves and cinematic effects.</p>
+          </div>
+          <div class="card">
+            <div class="icon">🎨</div>
+            <h3>Styles &amp; Templates</h3>
+            <p>Choose from a growing library of styles — cinematic, anime, 3D, vintage and more.</p>
+          </div>
+          <div class="card">
+            <div class="icon">⚡</div>
+            <h3>Fast Rendering</h3>
+            <p>Cloud-powered generation delivers your results quickly, right on your device.</p>
+          </div>
+          <div class="card">
+            <div class="icon">📱</div>
+            <h3>Social-Ready Formats</h3>
+            <p>Export in vertical, square or widescreen formats, perfect for any platform.</p>
+          </div>
+          <div class="card">
+            <div class="icon">💾</div>
+            <h3>Save &amp; Share</h3>
+            <p>Save videos to your gallery or share them with friends in one tap.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how-it-works" class="alt">
+      <div class="container">
+        <div class="section-title">
+          <h2>How it works</h2>
+          <p>Create your first AI video in three simple steps.</p>
+        </div>
+        <div class="grid steps">
+          <div class="card step">
+            <h3>Describe or upload</h3>
+            <p>Enter a text prompt or choose a photo from your device.</p>
+          </div>
+          <div class="card step">
+            <h3>Pick a style</h3>
+            <p>Select a visual style, aspect ratio and duration that fit your idea.</p>
+          </div>
+          <div class="card step">
+            <h3>Generate &amp; share</h3>
+            <p>Let the AI do the magic, then save or share your new video.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="container">
+        <div class="section-title">
+          <h2>Frequently asked questions</h2>
+        </div>
+        <div class="faq">
+          <details>
+            <summary>Do I need video editing experience?</summary>
+            <p>Not at all. AI Video Generator is designed for everyone — just describe what you want and the app handles the rest.</p>
+          </details>
+          <details>
+            <summary>Who owns the videos I create?</summary>
+            <p>You may use the videos you generate for personal and social purposes, subject to our Terms and applicable laws. Please do not create content that infringes on the rights of others.</p>
+          </details>
+          <details>
+            <summary>Is my content private?</summary>
+            <p>Your prompts and uploaded photos are used only to generate your videos and improve the service. See our <a href="polices.html" class="gradient-text">Privacy Policy</a> for details.</p>
+          </details>
+          <details>
+            <summary>How do I manage or cancel my subscription?</summary>
+            <p>Subscriptions are managed through your App Store / Google Play account settings. You can cancel at any time before the next billing period.</p>
+          </details>
+          <details>
+            <summary>How can I contact support?</summary>
+            <p>Email us at <a href="mailto:media.zclouds@gmail.com" class="gradient-text">media.zclouds@gmail.com</a> and we'll get back to you as soon as possible.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="contact-box">
+          <h2>Need help?</h2>
+          <p>Questions, feedback or feature requests? Our team at MediaZClouds is happy to help.</p>
+          <a href="mailto:media.zclouds@gmail.com" class="btn btn-primary">✉ media.zclouds@gmail.com</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© 2026 MediaZClouds. All rights reserved.</span>
+      <div class="footer-links">
+        <a href="polices.html">Privacy Policy</a>
+        <a href="mailto:media.zclouds@gmail.com">Contact</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
