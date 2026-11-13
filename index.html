@@ -73,7 +73,7 @@
     .btn-primary { background: linear-gradient(90deg, var(--accent), var(--accent-2)); color: #fff; }
     .btn-ghost { border: 1px solid var(--border); background: var(--bg-soft); margin-left: 12px; }
 
-    /* Store screenshots */
+    /* Feature images */
     .phone {
       width: 100%; max-width: 340px; margin: 0 auto;
       border-radius: 28px; overflow: hidden;
@@ -92,7 +92,6 @@
     .play-btn small { display: block; font-size: 0.7rem; color: #bbb; line-height: 1.1; }
     .play-btn strong { display: block; font-size: 1.15rem; line-height: 1.2; }
     .play-btn svg { width: 28px; height: 28px; }
-    .gallery { justify-content: safe center; }
 
     /* Sections */
     section { padding: 80px 0; }
@@ -115,15 +114,30 @@
     }
     .feature li span { flex-shrink: 0; }
 
-    /* Gallery */
-    .gallery {
-      display: flex; gap: 20px; overflow-x: auto; padding-bottom: 16px;
-      scroll-snap-type: x mandatory;
+    /* Showcase fan */
+    .showcase {
+      display: flex; justify-content: center; align-items: center;
+      padding: 40px 0 20px; perspective: 1400px;
     }
-    .gallery img {
-      flex: 0 0 auto; width: 240px; border-radius: 20px;
-      border: 1px solid var(--border); scroll-snap-align: start;
+    .showcase figure {
+      flex: 0 0 auto; width: 220px; margin: 0 -28px;
+      border-radius: 22px; overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      position: relative;
     }
+    .showcase figure:nth-child(1) { transform: rotate(-12deg) translateY(48px); z-index: 1; }
+    .showcase figure:nth-child(2) { transform: rotate(-6deg) translateY(14px); z-index: 2; }
+    .showcase figure:nth-child(3) { transform: scale(1.15); z-index: 3; box-shadow: 0 30px 90px rgba(59, 130, 255, 0.5); }
+    .showcase figure:nth-child(4) { transform: rotate(6deg) translateY(14px); z-index: 2; }
+    .showcase figure:nth-child(5) { transform: rotate(12deg) translateY(48px); z-index: 1; }
+    .showcase figure:hover { transform: translateY(-16px) scale(1.18); z-index: 5; box-shadow: 0 30px 90px rgba(59, 130, 255, 0.55); }
+
+    .highlights { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 72px; }
+    .highlight { text-align: center; padding: 24px; background: var(--card); border: 1px solid var(--border); border-radius: 16px; }
+    .highlight strong { display: block; font-size: 1.6rem; margin-bottom: 4px; }
+    .highlight span { color: var(--muted); font-size: 0.95rem; }
 
     /* Feedback */
     .feedback {
@@ -148,6 +162,10 @@
       .feature.reverse .feature-media { order: 0; }
       .btn-ghost { margin: 12px 0 0; }
       .hero-icon { max-width: 220px; border-radius: 44px; }
+      .showcase { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; padding: 0; }
+      .showcase figure, .showcase figure:nth-child(n) { width: auto; margin: 0; transform: none; }
+      .showcase figure:nth-child(3) { grid-column: 1 / -1; width: 60%; margin: 0 auto; order: -1; }
+      .highlights { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -164,7 +182,7 @@
         <a href="#dance">AI Dance</a>
         <a href="#templates">Templates</a>
         <a href="#projects">My Projects</a>
-        <a href="#screenshots">Screenshots</a>
+        <a href="#showcase">Showcase</a>
         <a href="polices.html">Privacy Policy</a>
       </nav>
     </div>
@@ -194,7 +212,7 @@
     <section id="ai-video">
       <div class="container feature">
         <div class="feature-media">
-          <div class="phone"><img loading="lazy" src="images/text-to-video.jpg" alt="AI video generator screen" /></div>
+          <div class="phone"><img loading="lazy" src="images/text-to-video.jpg" alt="Create videos from text with AI Video Studio" /></div>
         </div>
         <div>
           <div class="feature-tag">🎥</div>
@@ -214,7 +232,7 @@
     <section id="photo-to-video" class="alt">
       <div class="container feature reverse">
         <div class="feature-media">
-          <div class="phone"><img loading="lazy" src="images/photo-to-video.jpg" alt="Photo to video screen" /></div>
+          <div class="phone"><img loading="lazy" src="images/photo-to-video.jpg" alt="Animate your photos with AI" /></div>
         </div>
         <div>
           <div class="feature-tag">🖼️</div>
@@ -234,7 +252,7 @@
     <section id="dance">
       <div class="container feature">
         <div class="feature-media">
-          <div class="phone"><img loading="lazy" src="images/social-ready.jpg" alt="AI dance video maker screen" /></div>
+          <div class="phone"><img loading="lazy" src="images/social-ready.jpg" alt="Create social-ready AI videos" /></div>
         </div>
         <div>
           <div class="feature-tag">💃</div>
@@ -254,7 +272,7 @@
     <section id="templates" class="alt">
       <div class="container feature reverse">
         <div class="feature-media">
-          <div class="phone"><img loading="lazy" src="images/templates.jpg" alt="Trending AI templates screen" /></div>
+          <div class="phone"><img loading="lazy" src="images/templates.jpg" alt="Endless creative AI templates" /></div>
         </div>
         <div>
           <div class="feature-tag">✨</div>
@@ -274,7 +292,7 @@
     <section id="projects">
       <div class="container feature">
         <div class="feature-media">
-          <div class="phone"><img loading="lazy" src="images/projects.jpg" alt="My projects screen" /></div>
+          <div class="phone"><img loading="lazy" src="images/projects.jpg" alt="Manage all your AI video projects" /></div>
         </div>
         <div>
           <div class="feature-tag">📂</div>
@@ -290,21 +308,26 @@
       </div>
     </section>
 
-    <!-- Screenshots -->
-    <section id="screenshots" class="alt">
+    <!-- Showcase -->
+    <section id="showcase" class="alt">
       <div class="container">
         <div class="section-title">
-          <h2>Screenshots</h2>
-          <p>A quick look at AI Video Studio: Video Maker.</p>
+          <h2>One App. <span class="gradient-text">Endless Creativity.</span></h2>
+          <p>From a single prompt to a share-ready video — everything you need to create lives in one studio.</p>
         </div>
-        <div class="gallery">
-          <img loading="lazy" src="images/text-to-video.jpg" alt="Create videos from text" />
-          <img loading="lazy" src="images/photo-to-video.jpg" alt="Animate your photos" />
-          <img loading="lazy" src="images/social-ready.jpg" alt="Create social-ready videos" />
-          <img loading="lazy" src="images/templates.jpg" alt="Endless creative templates" />
-          <img loading="lazy" src="images/projects.jpg" alt="Everything in one studio" />
+        <div class="showcase">
+          <figure><img loading="lazy" src="images/photo-to-video.jpg" alt="Animate your photos" /></figure>
+          <figure><img loading="lazy" src="images/templates.jpg" alt="Endless creative templates" /></figure>
+          <figure><img loading="lazy" src="images/text-to-video.jpg" alt="Create videos from text" /></figure>
+          <figure><img loading="lazy" src="images/social-ready.jpg" alt="Create social-ready videos" /></figure>
+          <figure><img loading="lazy" src="images/projects.jpg" alt="Everything in one studio" /></figure>
         </div>
-        <div style="text-align:center;margin-top:40px">
+        <div class="highlights">
+          <div class="highlight"><strong class="gradient-text">Text &amp; Photo</strong><span>Start from a prompt or your favorite picture</span></div>
+          <div class="highlight"><strong class="gradient-text">Trending Styles</strong><span>Cinematic, anime, fantasy, retro and more</span></div>
+          <div class="highlight"><strong class="gradient-text">Share Anywhere</strong><span>Videos ready for TikTok, Reels and Shorts</span></div>
+        </div>
+        <div style="text-align:center;margin-top:48px">
           <a href="https://play.google.com/store/apps/details?id=com.videogenerator.aivideo.clip.textto" class="btn btn-primary" target="_blank" rel="noopener">Download on Google Play</a>
         </div>
       </div>
